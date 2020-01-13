@@ -32,6 +32,7 @@ OPTION (ENABLE_DOCS "Build the documentation" OFF)
 OPTION (ENABLE_GTESTS "Enable building and running GTest unit tests" ON)
 OPTION (ENABLE_BMV2 "Build the BMV2 backend (required for the full test suite)" ON)
 OPTION (ENABLE_EBPF "Build the EBPF backend (required for the full test suite)" ON)
+OPTION (ENABLE_POLYCUBE "Build the POLYCUBE backend (required for the full test suite)" ON)
 OPTION (ENABLE_UBPF "Build the uBPF backend (required for the full test suite)" ON)
 OPTION (ENABLE_P4TEST "Build the P4Test backend (required for the full test suite)" ON)
 OPTION (ENABLE_P4C_GRAPHS "Build the p4c-graphs backend" ON)
@@ -278,6 +279,9 @@ endif ()
 if (ENABLE_EBPF)
     add_subdirectory (backends/ebpf)
 endif ()
+if (ENABLE_POLYCUBE)
+    add_subdirectory (backends/polycube)
+endif ()
 if (ENABLE_UBPF)
     add_subdirectory (backends/ubpf)
 endif ()
@@ -333,6 +337,9 @@ add_custom_target(genIR DEPENDS ${IR_GENERATED_SRCS})
 set (OTHER_HEADERS
   backends/ebpf/p4include/ebpf_model.p4
   )
+set (OTHER_HEADERS
+  backends/polycube/p4include/polycube_model.p4)
+
 add_custom_target(update_includes ALL
   COMMAND ${CMAKE_COMMAND} -E make_directory ${P4C_BINARY_DIR}/p4include
   COMMAND ${CMAKE_COMMAND} -E copy_if_different ${P4C_SOURCE_DIR}/p4include/*.p4 ${P4C_BINARY_DIR}/p4include

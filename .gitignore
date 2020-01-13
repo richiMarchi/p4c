@@ -37,3 +37,9 @@ build/
 
 # macOS files
 .DS_Store
+
+.idea/
+backends/ebpf/.idea/
+backends/ebpf/cmake-build-debug/
+cmake-build-debug/
+
